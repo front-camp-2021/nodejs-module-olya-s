@@ -1,8 +1,3 @@
-// import express from 'express';
-// import cors from 'cors';
-// import fs from 'fs';
-// import bodyParser from 'body-parser';
-// import { v4 as uuidv4 } from 'uuid';
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
@@ -12,9 +7,6 @@ const port = 3000;
 
 const app = express();
 
-// app.use(cors({
-//   origin: "http://127.0.0.1:5500",
-// }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

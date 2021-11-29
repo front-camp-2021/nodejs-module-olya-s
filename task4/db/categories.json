@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "Monitors"
+  },
+  {
+    "id": 2,
+    "title": "Laptops"
+  },
+  {
+    "id": 3,
+    "title": "Video cards"
+  },
+  {
+    "id": 4,
+    "title": "Gaming keyboards"
+  },
+  {
+    "id": 5,
+    "title": "Computer mouse"
+  },
+  {
+    "id": 6,
+    "title": "SSD"
+  },
+  {
+    "id": 7,
+    "title": "Sound cards"  
+  },
+  {
+    "id": 8,
+    "title": "RAM"
+  }
+]
