@@ -1,7 +1,6 @@
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
-const { v4: uuidv4 } = require('uuid');
 
 const port = 3000;
 
@@ -27,19 +26,18 @@ app.get('/users/:id', (req, res) => {
   fs.readFile('./task3/db/users.json', 'utf-8', (err, data) => {
     if(err) console.log("error: ", err);
     const users = JSON.parse(data);
-    const user = users.filter(user => user.id === id);
+    const user = users.find(user => user.id === +id);
     res.send(user);
   });
 });
 
 app.post('/users', (req, res) => {
   let { user } = req.body;
-  const id = uuidv4();
-  user.id = id;
-  const parseUser = JSON.stringify(user);
   fs.readFile('./task3/db/users.json', 'utf-8', (err, data) => {
     if(err) console.log("error", err);
     let users = JSON.parse(data);
+    const maxId = users.reduce((acc, currentUser) => acc > currentUser.id ? acc : currentUser.id, 0);
+    user.id = maxId + 1;
     users.push(user);
     fs.writeFile('./task3/db/users.json', JSON.stringify(users), (err) => {
       if(err) throw err;
@@ -54,13 +52,17 @@ app.put('/users/:id', (req, res) => {
   fs.readFile('./task3/db/users.json', 'utf-8', (err, data) => {
     if(err) console.log("error", err);
     let users = JSON.parse(data);
-    users = users.map(existingUser =>
-      existingUser.id === id ? { ...user, id } : existingUser
-    );
-    fs.writeFile('./task3/db/users.json', JSON.stringify(users), (err) => {
-      if(err) throw err;
-    });
-    res.send(users);
+    const userIndex = users.findIndex(user => user.id === +id);
+    if(userIndex !== -1) {
+      users[userIndex] = { ...user, id: +id };
+      fs.writeFile('./task3/db/users.json', JSON.stringify(users), (err) => {
+        if(err) throw err;
+      });
+      res.send(users[userIndex]);
+    }
+    else {
+      res.status(404).json({error: "User not found"});
+    }
   });
 });
 
@@ -71,7 +73,7 @@ app.delete('/users', (req, res) => {
     fs.writeFile('./task3/db/users.json', JSON.stringify(users), (err) => {
       if(err) throw err;
     });
-    res.send(users);
+    res.status(204).json({status: "ok"});
   });
 });
 
@@ -80,10 +82,16 @@ app.delete('/users/:id', (req, res) => {
   fs.readFile('./task3/db/users.json', 'utf-8', (err, data) => {
     if(err) console.log("error", err);
     let users = JSON.parse(data);
-    users = users.filter(user => user.id !== id);
-    fs.writeFile('./task3/db/users.json', JSON.stringify(users), (err) => {
-      if(err) throw err;
-    });
-    res.send(users);
+    let userIndex = users.findIndex(user => user.id === +id);
+    if(userIndex !== -1){
+      users.splice(userIndex, 1);
+      fs.writeFile('./task3/db/users.json', JSON.stringify(users), (err) => {
+        if(err) throw err;
+      });
+      res.status(204).json({status: "ok"});
+    }
+    else {
+      res.status(404).json({error: "User not found"});
+    }
   });
 });

@@ -16,23 +16,13 @@ app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
 
-fs.writeFile('./files/file.txt', '', (err) => {
+let numbers = '';
+for(let i = 1; i <= 10; i++) {
+  numbers = numbers + i + '\n';
+}
+fs.writeFile('./files/file.txt', numbers, (err) => {
   if(err) throw err;
 });
-
-fs.readFile('./files/file.txt', 'utf-8', (err, data) => {
-  if(err) throw err;
-  for(let i = 1; i <= 10; i++){
-    fs.appendFile('./files/file.txt', i + '\n', (err) => {
-      if(err) throw err;
-    });
-  }
-});
-
-// const text = 'Some text for file to be read and deleted';
-// fs.writeFile('./files/file2.txt', text, (err) => {
-//   if(err) throw err;
-// })
 
 fs.readFile('./files/file2.txt', 'utf-8', (err, data) => {
   if(err) throw err;
