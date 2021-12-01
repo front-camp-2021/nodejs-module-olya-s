@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Asus"
+  },
+  {
+    "id": 2,
+    "title": "Acer"
+  },
+  {
+    "id": 3,
+    "title": "Apple"
+  },
+  {
+    "id": 4,
+    "title": "Dell"
+  },
+  {
+    "id": 5,
+    "title": "Dynamode"
+  },
+  {
+    "id": 6,
+    "title": "Gigabyte"
+  },
+  {
+    "id": 7,
+    "title": "Kingston"
+  },
+  {
+    "id": 8,
+    "title": "Lenovo"
+  },
+  {
+    "id": 9,
+    "title": "Logitech"
+  },
+  {
+    "id": 10,
+    "title": "MSI"
+  },
+  {
+    "id": 11,
+    "title": "BenQ"
+  },
+  {
+    "id": 12,
+    "title": "A4Tech"
+  }
+]

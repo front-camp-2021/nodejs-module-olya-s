@@ -1,0 +1,1 @@
+Some text for file to be read and deleted
